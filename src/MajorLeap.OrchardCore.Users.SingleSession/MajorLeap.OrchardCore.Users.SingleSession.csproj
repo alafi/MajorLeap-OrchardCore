@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <OutputType>Library</OutputType>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageTags>OrchardCore;Orchard CMS;Users;Single Session</PackageTags>
+    <RepositoryType></RepositoryType>
+    <Description>An OrchardCore module that prevents users from having more than one cookie-based sign-in sessions at the same time.</Description>
+    <Authors>ALafi</Authors>
+    <Company>Major Leap</Company>
+    <Version>$(VersionPrefix)</Version>
+    <Title>MajorLeap - OrchardCore Users Single Session</Title>
+    <Copyright>wwww.majorleap.com</Copyright>
+    <PackageProjectUrl>https://www.majorleap.com</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/alafi/MajorLeap-OrchardCore/tree/main/src/MajorLeap.OrchardCore.Users.SingleSession</RepositoryUrl>
+    <IsPackable>true</IsPackable>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OrchardCore.Module.Targets" Version="1.5.0" />
+    <PackageReference Include="OrchardCore.Users.Abstractions" Version="1.5.0" />
+    <PackageReference Include="OrchardCore.Infrastructure" Version="1.5.0" />
+  </ItemGroup>
+</Project>
