@@ -18,7 +18,7 @@ namespace MajorLeap.OrchardCore.Users.SingleSession.Services
         public async Task GenerateAsync(IUser user, ClaimsIdentity claims)
         {
             var newSessionId = Guid.NewGuid().ToString("N");
-            await _distributedCache.SetStringAsync(Startup._SESSION_ID_KEY, newSessionId);
+            await _distributedCache.SetStringAsync($"{claims.FindFirst(ClaimTypes.NameIdentifier)?.Value}_{Startup._SESSION_ID_KEY}", newSessionId);
             claims.AddClaim(new Claim(Startup._SESSION_ID_KEY, newSessionId));
         }
     }

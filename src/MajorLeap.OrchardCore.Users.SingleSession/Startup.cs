@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication;
 using OrchardCore.Users;
 using MajorLeap.OrchardCore.Users.SingleSession.Services;
 using Microsoft.Extensions.Caching.Distributed;
+using System.Security.Claims;
 
 namespace MajorLeap.OrchardCore.Users.SingleSession
 {
@@ -34,7 +35,8 @@ namespace MajorLeap.OrchardCore.Users.SingleSession
                     if (principal?.Identity?.IsAuthenticated ?? false)
                     {
                         var distributedCache = context.HttpContext.RequestServices.GetService<IDistributedCache>() ?? throw new InvalidOperationException($"Couldn't resolve service {nameof(IDistributedCache)}");
-                        var storedSessionId = await distributedCache.GetStringAsync(_SESSION_ID_KEY);
+                        var userId = principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                        var storedSessionId = await distributedCache.GetStringAsync($"{userId}_{_SESSION_ID_KEY}");
                         var claimsSessionId = principal.FindFirst(_SESSION_ID_KEY)?.Value;
                         if (storedSessionId == null || claimsSessionId == null || storedSessionId != claimsSessionId)
                         {
